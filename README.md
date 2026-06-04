@@ -1,7 +1,6 @@
 # NiTools Suite
 
 <p align="center">
-  <img src="assets/nitools-logo.png" alt="NiTools Suite" width="256">
 </p>
 
 <h3 align="center">
