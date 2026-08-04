@@ -29,8 +29,6 @@ Most analysis tools stop at presenting instructions, symbols, and control flow. 
 
 > **The philosophy:** reverse engineers should spend less time rebuilding context and more time generating insight.
 
-**V2** significantly expands the platform with a second reconstruction tier (Recovery eXtensions), an integrated Capstone WASM disassembly engine with x86/x64/ARM/MIPS support, an Analyst Query panel for contextual binary interrogation, and a broad set of new analysis modules across every section of the tool.
-
 <img width="100%" src="https://capsule-render.vercel.app/api?type=rect&color=0:8A2BE2,100:00599C&height=3&section=header"/>
 
 ## 🧭 Module Groups
