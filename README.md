@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="nitools-logo.png" alt="NiTools Suite" width="440">
+<img src="nisuite-logo.png" alt="NiTools Suite" width="440">
 
 [![Capabilities](https://img.shields.io/badge/capabilities-5%20cores-8A2BE2?style=for-the-badge)](#-core-capabilities)
 [![Platform](https://img.shields.io/badge/platform-browser--based-8A2BE2?style=for-the-badge)](#what-is-nitools-suite)
