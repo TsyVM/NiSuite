@@ -1,203 +1,185 @@
-# NiTools Suite
+<div align="center">
 
-<p align="center">
-</p>
+<img src="nitools-logo.png" alt="NiTools Suite" width="440">
 
-<h3 align="center">
-Reverse the Binary. Reconstruct the Architecture.
-</h3>
+[![Capabilities](https://img.shields.io/badge/capabilities-5%20cores-8A2BE2?style=for-the-badge)](#-core-capabilities)
+[![Platform](https://img.shields.io/badge/platform-browser--based-8A2BE2?style=for-the-badge)](#what-is-nitools-suite)
+[![Plugins](https://img.shields.io/badge/architecture-plugin--based-00599C?style=for-the-badge)](#plugin-architecture)
+[![TeamVanilla](https://img.shields.io/badge/by-TeamVanilla-8A2BE2?style=for-the-badge)](https://www.teamvanilla.org/)
 
-<p align="center">
-A modern reverse engineering platform focused on architecture recovery, binary intelligence, security analysis, and software understanding.
-</p>
+<br/>
 
----
+[![PE Parsing](https://img.shields.io/badge/PE-parsing%20%2B%20intelligence-brightgreen?style=flat-square)](#binary-analysis)
+[![RTTI](https://img.shields.io/badge/RTTI-class%20recovery-blueviolet?style=flat-square)](#architecture-recovery)
+[![VTables](https://img.shields.io/badge/vtables-recovery%20engine-brightgreen?style=flat-square)](#reverse-engineering)
+[![Security](https://img.shields.io/badge/security-MITRE%20ATT%26CK%20mapped-red?style=flat-square)](#security-analysis)
+[![SDKGen](https://img.shields.io/badge/output-headers%20%2B%20SDKs-3776AB?style=flat-square)](#research-tooling)
+[![Ecosystem](https://img.shields.io/badge/ecosystem-Ghidra%20%7C%20IDA%20%7C%20Binja-00599C?style=flat-square)](#how-nitools-fits-into-the-ecosystem)
 
-## What is NiTools Suite?
+</div>
 
-NiTools Suite is a browser-based reverse engineering and binary analysis platform designed to recover meaningful information from compiled software.
+<img width="100%" src="https://capsule-render.vercel.app/api?type=rect&color=0:8A2BE2,100:00599C&height=3&section=header"/>
 
-Most analysis tools stop at presenting instructions, symbols, and control flow.
+## 📖 What is NiTools Suite?
 
-NiTools focuses on discovering the higher-level architecture hidden within a binary.
+**NiTools Suite** is a browser-based reverse engineering and binary analysis platform designed to recover meaningful information from compiled software.
 
----
+Most analysis tools stop at presenting instructions, symbols, and control flow. **NiTools focuses on discovering the higher-level architecture hidden within a binary.**
 
-# Core Capabilities
+> **The philosophy:** reverse engineers should spend less time rebuilding context and more time generating insight.
 
-## Binary Analysis
+<img width="100%" src="https://capsule-render.vercel.app/api?type=rect&color=0:8A2BE2,100:00599C&height=3&section=header"/>
 
-- Portable Executable (PE) Parsing
-- Import Analysis
-- Export Analysis
-- Resource Inspection
-- Relocation Analysis
-- TLS Callback Detection
-- Rich Header Analysis
-- Overlay Detection
-- Section Intelligence
-- Compiler Fingerprinting
+## 🧭 Core Capabilities
 
-## Architecture Recovery
+> Five pillars, each deep enough to stand on its own — together they turn a binary into an architecture report.
 
-- Class Hierarchies
-- RTTI Structures
-- VTables
-- Constructors
-- Destructors
-- Object Relationships
-- Engine Subsystems
-- Runtime Ownership Patterns
-- Cross-Module Relationships
+### 🧩 Binary Analysis
 
-## Reverse Engineering
+| Feature | Description |
+|---|---|
+| PE Parsing | Full Portable Executable structural walk |
+| Import / Export Analysis | Resolve dependencies and surface exposed symbols |
+| Resource Inspection | Enumerate and extract embedded resources |
+| Relocation Analysis | Map base-relocation records |
+| TLS Callback Detection | Surface pre-`main` execution hooks |
+| Rich Header Analysis | Recover compiler/toolchain fingerprints |
+| Overlay Detection | Find data appended past the PE image |
+| Section Intelligence | Characterize sections by entropy, permissions, and role |
+| Compiler Fingerprinting | Identify the toolchain that produced the binary |
 
-- VTable Recovery
-- RTTI Reconstruction
-- Class Recovery
-- Function Classification
-- Structure Recovery
-- String Intelligence
-- Cross-Reference Analysis
-- Call Graph Exploration
-- Engine Pattern Recognition
+### 🏛️ Architecture Recovery
 
-## Security Analysis
+| Feature | Description |
+|---|---|
+| Class Hierarchies | Reconstruct inheritance from binary evidence |
+| RTTI Structures | Parse compiler-emitted type information |
+| VTables | Recover virtual dispatch tables |
+| Constructors / Destructors | Identify object lifecycle functions |
+| Object Relationships | Map ownership and composition |
+| Engine Subsystems | Identify functional subsystem boundaries |
+| Runtime Ownership Patterns | Trace who owns what, and when |
+| Cross-Module Relationships | Follow architecture across module boundaries |
 
-- Entropy Analysis
-- Packer Detection
-- Capability Detection
-- Threat API Discovery
-- MITRE ATT&CK Mapping
-- Suspicious Behavior Detection
-- Timestamp Forensics
-- Network Indicator Discovery
-- Heuristic Risk Assessment
-- YARA Rule Generation
+### 🔍 Reverse Engineering
 
-## Research Tooling
+| Feature | Description |
+|---|---|
+| VTable Recovery | Virtual table reconstruction |
+| RTTI Reconstruction | Rebuild type descriptors from raw bytes |
+| Class Recovery | Full class definition reconstruction |
+| Function Classification | Categorize functions by role and behavior |
+| Structure Recovery | Recover struct/class memory layouts |
+| String Intelligence | Correlate strings with owning code |
+| Cross-Reference Analysis | Trace usage across the binary |
+| Call Graph Exploration | Visualize and navigate call relationships |
+| Engine Pattern Recognition | Detect known engine architectures automatically |
 
-- C++ Header Generation
-- SDK Generation
-- Ghidra Export Support
-- Frida Hook Generation
-- Architecture Reports
-- Plugin Packs
-- Custom Signatures
-- Pattern Libraries
-- Research Notes
+### 🛡️ Security Analysis
 
----
+| Feature | Description |
+|---|---|
+| Entropy Analysis | Flag packed or encrypted regions |
+| Packer Detection | Identify known packers and protectors |
+| Capability Detection | Surface what a binary is capable of doing |
+| Threat API Discovery | Flag suspicious API usage |
+| MITRE ATT&CK Mapping | Map behaviors to the ATT&CK framework |
+| Suspicious Behavior Detection | Heuristic flagging of risky patterns |
+| Timestamp Forensics | Analyze compile-time and header timestamps |
+| Network Indicator Discovery | Surface embedded network artifacts |
+| Heuristic Risk Assessment | Score overall binary risk |
+| YARA Rule Generation | Auto-generate detection rules |
 
-# Why NiTools?
+### 🧪 Research Tooling
 
-Most static analysis tools focus on presenting low-level information.
+| Feature | Description |
+|---|---|
+| C++ Header Generation | Emit usable headers from recovered classes |
+| SDK Generation | Produce ready-to-use SDKs |
+| Ghidra Export Support | Round-trip findings into Ghidra |
+| Frida Hook Generation | Auto-generate instrumentation hooks |
+| Architecture Reports | Human-readable summaries of recovered structure |
+| Plugin Packs | Bundle and share research |
+| Custom Signatures | Define your own detection patterns |
+| Pattern Libraries | Reusable signature collections |
+| Research Notes | Attach knowledge directly to findings |
 
-NiTools focuses on recovering knowledge.
+<img width="100%" src="https://capsule-render.vercel.app/api?type=rect&color=0:8A2BE2,100:00599C&height=3&section=header"/>
 
-The platform is designed around a simple philosophy:
+## ⚖️ How NiTools Fits Into The Ecosystem
 
-> Reverse engineers should spend less time rebuilding context and more time generating insight.
+NiTools isn't a replacement for your disassembler — it's the layer that turns its output into architecture.
 
----
+| Tool | Their strength | Where NiTools complements |
+|---|---|---|
+| **Ghidra** | Interactive disassembly, decompilation, scripting | Automated architecture recovery, RTTI discovery, VTable analysis, class relationship reconstruction, subsystem discovery |
+| **IDA Pro** | Deep manual analysis, industry standard | Automated knowledge extraction, architecture reconstruction, rapid binary triage |
+| **Binary Ninja** | Intermediate-language workflows | Structural recovery, system identification, runtime architecture discovery, class hierarchy reconstruction |
+| **PE-bear** | PE inspection | Architecture recovery, RTTI discovery, subsystem analysis, binary intelligence |
+| **Detect It Easy (DIE)** | Packer ID, compiler detection, fingerprinting | Architecture recovery, security intelligence, class reconstruction, engine research |
 
-# How NiTools Fits Into The Ecosystem
+<img width="100%" src="https://capsule-render.vercel.app/api?type=rect&color=0:8A2BE2,100:00599C&height=3&section=header"/>
 
-## Compared to Ghidra
-
-Ghidra excels at interactive disassembly, decompilation, and scripting.
-
-NiTools complements this approach by emphasizing automated architecture recovery, RTTI discovery, VTable analysis, class relationship reconstruction, and subsystem discovery.
-
-## Compared to IDA Pro
-
-IDA Pro remains an industry standard for deep manual analysis.
-
-NiTools focuses on automated knowledge extraction, architecture reconstruction, rapid binary triage, and software understanding.
-
-## Compared to Binary Ninja
-
-Binary Ninja provides excellent intermediate-language workflows.
-
-NiTools focuses on structural recovery, system identification, runtime architecture discovery, and class hierarchy reconstruction.
-
-## Compared to PE-bear
-
-PE-bear excels at PE inspection.
-
-NiTools extends analysis into architecture recovery, RTTI discovery, subsystem analysis, and binary intelligence workflows.
-
-## Compared to Detect It Easy (DIE)
-
-DIE excels at packer identification, compiler detection, and fingerprinting.
-
-NiTools expands into architecture recovery, security intelligence, class reconstruction, and engine research.
-
----
-
-# Plugin Architecture
+## 🧩 Plugin Architecture
 
 NiTools includes a modular plugin architecture allowing custom:
 
-- Engine Signatures
-- RTTI Databases
-- Class Definitions
-- String Intelligence
-- Security Heuristics
-- Pattern Recognition Rules
-- Research Workflows
+- 🔧 Engine Signatures
+- 🏛️ RTTI Databases
+- 📦 Class Definitions
+- 🔤 String Intelligence
+- 🛡️ Security Heuristics
+- 🎯 Pattern Recognition Rules
+- 🧪 Research Workflows
 
----
+<img width="100%" src="https://capsule-render.vercel.app/api?type=rect&color=0:8A2BE2,100:00599C&height=3&section=header"/>
 
-# Designed For
+## 🎯 Designed For
 
-- Reverse Engineers
-- Malware Analysts
-- Security Researchers
-- Game Modders
-- Engine Researchers
-- Software Archaeologists
-- Systems Developers
-- Digital Forensics Analysts
+<div align="center">
 
----
+| | | |
+|:--:|:--:|:--:|
+| 🔍 Reverse Engineers | 🦠 Malware Analysts | 🛡️ Security Researchers |
+| 🎮 Game Modders | ⚙️ Engine Researchers | 🏺 Software Archaeologists |
+| 💻 Systems Developers | 🔬 Digital Forensics Analysts | |
 
-# Philosophy
+</div>
 
-## Recover Knowledge
+<img width="100%" src="https://capsule-render.vercel.app/api?type=rect&color=0:8A2BE2,100:00599C&height=3&section=header"/>
 
-Software contains architecture. The challenge is extracting it.
+## 🌱 Philosophy
 
-## Explain Structure
+**Recover Knowledge** — software contains architecture; the challenge is extracting it.
 
-Names, ownership, inheritance, and subsystem boundaries matter.
+**Explain Structure** — names, ownership, inheritance, and subsystem boundaries matter.
 
-## Accelerate Research
+**Accelerate Research** — researchers should spend less time rebuilding context and more time generating insight.
 
-Researchers should spend less time rebuilding context and more time generating insight.
+<img width="100%" src="https://capsule-render.vercel.app/api?type=rect&color=0:8A2BE2,100:00599C&height=3&section=header"/>
 
----
-
-# Vision
+## 🔭 Vision
 
 To build one of the most capable architecture recovery and binary intelligence platforms available.
 
-Not simply a disassembler.
+Not simply a disassembler. Not simply a PE parser. Not simply another static analysis engine.
 
-Not simply a PE parser.
+**A platform for recovering and understanding software architecture.**
 
-Not simply another static analysis engine.
+<img width="100%" src="https://capsule-render.vercel.app/api?type=rect&color=0:8A2BE2,100:00599C&height=3&section=header"/>
 
-A platform for recovering and understanding software architecture.
+<div align="center">
 
----
+## ☕ TeamVanilla
 
-# TeamVanilla
+<a href="https://www.teamvanilla.org/">
+<img src="https://img.shields.io/badge/TeamVanilla-Visit%20Website-8A2BE2?style=for-the-badge" alt="TeamVanilla"/>
+</a>
 
-Created and maintained by TeamVanilla.
+Created and maintained by **TeamVanilla** — building tools for people who want to understand how software really works.
 
-Building tools for people who want to understand how software really works.
+*"Reverse the Binary. Reconstruct the Architecture."*
 
----
+</div>
 
-**Reverse the Binary. Reconstruct the Architecture.**
+<img width="100%" src="https://capsule-render.vercel.app/api?type=waving&color=0:00599C,100:8A2BE2&height=100&section=footer"/>
