@@ -33,8 +33,6 @@ Most analysis tools stop at presenting instructions, symbols, and control flow. 
 
 ## 🧭 Module Groups
 
-NiTools V2 organizes its capabilities into nine module groups accessible from the sidebar.
-
 ---
 
 ### 🎯 Core Analysis
