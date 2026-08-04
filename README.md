@@ -2,18 +2,19 @@
 
 <img src="nisuite-logo.png" alt="NiTools Suite" width="440">
 
-[![Capabilities](https://img.shields.io/badge/capabilities-5%20cores-8A2BE2?style=for-the-badge)](#-core-capabilities)
+[![Version](https://img.shields.io/badge/version-V2-8A2BE2?style=for-the-badge)](#)
 [![Platform](https://img.shields.io/badge/platform-browser--based-8A2BE2?style=for-the-badge)](#what-is-nitools-suite)
-[![Plugins](https://img.shields.io/badge/architecture-plugin--based-00599C?style=for-the-badge)](#plugin-architecture)
+[![Architecture](https://img.shields.io/badge/architecture-plugin--based-00599C?style=for-the-badge)](#plugin-architecture)
 [![TeamVanilla](https://img.shields.io/badge/by-TeamVanilla-8A2BE2?style=for-the-badge)](https://www.teamvanilla.org/)
 
 <br/>
 
-[![PE Parsing](https://img.shields.io/badge/PE-parsing%20%2B%20intelligence-brightgreen?style=flat-square)](#binary-analysis)
-[![RTTI](https://img.shields.io/badge/RTTI-class%20recovery-blueviolet?style=flat-square)](#architecture-recovery)
-[![VTables](https://img.shields.io/badge/vtables-recovery%20engine-brightgreen?style=flat-square)](#reverse-engineering)
-[![Security](https://img.shields.io/badge/security-MITRE%20ATT%26CK%20mapped-red?style=flat-square)](#security-analysis)
-[![SDKGen](https://img.shields.io/badge/output-headers%20%2B%20SDKs-3776AB?style=flat-square)](#research-tooling)
+[![PE Parsing](https://img.shields.io/badge/PE-parsing%20%2B%20intelligence-brightgreen?style=flat-square)](#pe-structure)
+[![RTTI](https://img.shields.io/badge/RTTI-v2%20%2F%20CLI%20recovery-blueviolet?style=flat-square)](#reconstruction)
+[![VTables](https://img.shields.io/badge/vtables-recovery%20engine-brightgreen?style=flat-square)](#reconstruction)
+[![Disasm](https://img.shields.io/badge/disasm-Capstone%20x86%2Fx64%2FARM%2FMIPS-orange?style=flat-square)](#code-analysis)
+[![Security](https://img.shields.io/badge/security-MITRE%20ATT%26CK%20mapped-red?style=flat-square)](#security)
+[![Export](https://img.shields.io/badge/export-JSON%20%7C%20YAML%20%7C%20SDB-3776AB?style=flat-square)](#export--utilities)
 [![Ecosystem](https://img.shields.io/badge/ecosystem-Ghidra%20%7C%20IDA%20%7C%20Binja-00599C?style=flat-square)](#how-nitools-fits-into-the-ecosystem)
 
 </div>
@@ -24,85 +25,192 @@
 
 **NiTools Suite** is a browser-based reverse engineering and binary analysis platform designed to recover meaningful information from compiled software.
 
-Most analysis tools stop at presenting instructions, symbols, and control flow. **NiTools focuses on discovering the higher-level architecture hidden within a binary.**
+Most analysis tools stop at presenting instructions, symbols, and control flow. **NiTools focuses on discovering the higher-level architecture hidden within a binary** — and surfacing it as structured, actionable knowledge.
 
 > **The philosophy:** reverse engineers should spend less time rebuilding context and more time generating insight.
 
+**V2** significantly expands the platform with a second reconstruction tier (Recovery eXtensions), an integrated Capstone WASM disassembly engine with x86/x64/ARM/MIPS support, an Analyst Query panel for contextual binary interrogation, and a broad set of new analysis modules across every section of the tool.
+
 <img width="100%" src="https://capsule-render.vercel.app/api?type=rect&color=0:8A2BE2,100:00599C&height=3&section=header"/>
 
-## 🧭 Core Capabilities
+## 🧭 Module Groups
 
-> Five pillars, each deep enough to stand on its own — together they turn a binary into an architecture report.
+NiTools V2 organizes its capabilities into nine module groups accessible from the sidebar.
 
-### 🧩 Binary Analysis
+---
 
-| Feature | Description |
+### 🎯 Core Analysis
+
+Entry-point modules, available the moment a binary is loaded.
+
+| Module | Description |
 |---|---|
-| PE Parsing | Full Portable Executable structural walk |
-| Import / Export Analysis | Resolve dependencies and surface exposed symbols |
-| Resource Inspection | Enumerate and extract embedded resources |
-| Relocation Analysis | Map base-relocation records |
-| TLS Callback Detection | Surface pre-`main` execution hooks |
-| Rich Header Analysis | Recover compiler/toolchain fingerprints |
-| Overlay Detection | Find data appended past the PE image |
-| Section Intelligence | Characterize sections by entropy, permissions, and role |
-| Compiler Fingerprinting | Identify the toolchain that produced the binary |
+| Overview | Binary summary dashboard — stats, threat level, compiler, key findings |
+| File Information | SHA hashes, timestamps, size, entropy overview, VirusTotal pivot links |
+| Hex Viewer | Raw byte-level view of the loaded binary |
+| Analyst Notes | Persistent per-session markdown notes attached to the current binary |
 
-### 🏛️ Architecture Recovery
+---
 
-| Feature | Description |
+### 🏛️ Reconstruction ★
+
+The primary architecture recovery tier. Reconstructs the high-level structure compiled out of the binary.
+
+| Module | Description |
 |---|---|
-| Class Hierarchies | Reconstruct inheritance from binary evidence |
-| RTTI Structures | Parse compiler-emitted type information |
-| VTables | Recover virtual dispatch tables |
-| Constructors / Destructors | Identify object lifecycle functions |
-| Object Relationships | Map ownership and composition |
-| Engine Subsystems | Identify functional subsystem boundaries |
-| Runtime Ownership Patterns | Trace who owns what, and when |
-| Cross-Module Relationships | Follow architecture across module boundaries |
+| Architecture Recovery | Full structural recovery — subsystems, class relationships, ownership patterns |
+| Class Hierarchy | Inheritance tree reconstruction from binary evidence |
+| VTable Analysis | Virtual dispatch table recovery and slot mapping |
+| Structure Recovery | Struct and class memory layout reconstruction |
+| Type Recovery | Compiler type information recovery |
+| Ctor/Dtor Recovery | Object lifecycle function identification |
+| Serialization Recovery | Detection and recovery of serialization patterns |
+| Cross-References | XRef resolution across the full binary |
+| RE Toolkit | Integrated reverse engineering utilities — header gen, SDK output, Frida hook gen, Ghidra export |
+| Game Model | Game engine subsystem and entity model recovery |
+| Provenance & Confidence | Per-finding confidence scoring and source attribution |
 
-### 🔍 Reverse Engineering
+---
 
-| Feature | Description |
+### 🔬 Recovery eXtensions
+
+A second reconstruction tier added in V2, targeting finer-grained binary artifacts.
+
+| Module | Description |
 |---|---|
-| VTable Recovery | Virtual table reconstruction |
-| RTTI Reconstruction | Rebuild type descriptors from raw bytes |
-| Class Recovery | Full class definition reconstruction |
-| Function Classification | Categorize functions by role and behavior |
-| Structure Recovery | Recover struct/class memory layouts |
-| String Intelligence | Correlate strings with owning code |
-| Cross-Reference Analysis | Trace usage across the binary |
-| Call Graph Exploration | Visualize and navigate call relationships |
-| Engine Pattern Recognition | Detect known engine architectures automatically |
+| Symbol Demangler | MSVC and GCC/Clang name demangling |
+| Name Propagator | Propagate recovered names across the binary |
+| Getter/Setter Map | Accessor pattern detection and mapping |
+| Thunk Resolver | Identify and resolve thunk trampolines |
+| Stack Strings | Recover strings assembled at runtime on the stack |
+| Switch Tables | Detect and recover jump table structures |
+| Lambda Detector | Identify compiler-generated lambda and closure objects |
+| Class Size Estimator | Infer class sizes from allocation and constructor evidence |
+| Function Heatmap | Cross-reference density and call frequency heatmap |
+| Middleware Hub | Detect embedded middleware, libraries, and SDKs |
+| COMDAT Folding | Identify folded identical functions (ICF) |
+| Function Fingerprints | Structural function signatures for matching across builds |
+| RTTI v2 / CLI | Extended RTTI reconstruction with CLI output |
+| Offset Verifier | Validate recovered struct offsets against binary evidence |
+| .pdata Unwind | Parse x64 exception unwind records |
+| Engine Dictionary | Known engine pattern and symbol reference library |
 
-### 🛡️ Security Analysis
+---
 
-| Feature | Description |
+### ⚙️ Code Analysis
+
+Static analysis of code structure and behaviour.
+
+| Module | Description |
 |---|---|
-| Entropy Analysis | Flag packed or encrypted regions |
-| Packer Detection | Identify known packers and protectors |
-| Capability Detection | Surface what a binary is capable of doing |
-| Threat API Discovery | Flag suspicious API usage |
-| MITRE ATT&CK Mapping | Map behaviors to the ATT&CK framework |
-| Suspicious Behavior Detection | Heuristic flagging of risky patterns |
-| Timestamp Forensics | Analyze compile-time and header timestamps |
-| Network Indicator Discovery | Surface embedded network artifacts |
-| Heuristic Risk Assessment | Score overall binary risk |
-| YARA Rule Generation | Auto-generate detection rules |
+| Strings | String extraction with categorization and pattern tagging |
+| Import Table | Full import resolution with API categorization |
+| Export Table | Export enumeration and symbol mapping |
+| Disassembly | Capstone-powered disassembly engine — x86/x64/ARM/MIPS (WASM, Defcon 2026) |
+| Decompiler | Pseudo-C output for recovered functions |
+| Control Flow Graph | Interactive CFG visualization per function |
+| Function Map | Full function inventory with role classification |
+| Signatures | Byte-pattern signature matching across the binary |
+| Stack Frames | Stack layout recovery per function |
+| String X-Refs | Cross-reference strings back to owning code |
+| Script Console | In-browser scripting against the live analysis state |
 
-### 🧪 Research Tooling
+---
 
-| Feature | Description |
+### 📦 PE Structure
+
+Deep inspection of the Portable Executable format.
+
+| Module | Description |
 |---|---|
-| C++ Header Generation | Emit usable headers from recovered classes |
-| SDK Generation | Produce ready-to-use SDKs |
-| Ghidra Export Support | Round-trip findings into Ghidra |
-| Frida Hook Generation | Auto-generate instrumentation hooks |
-| Architecture Reports | Human-readable summaries of recovered structure |
-| Plugin Packs | Bundle and share research |
-| Custom Signatures | Define your own detection patterns |
-| Pattern Libraries | Reusable signature collections |
-| Research Notes | Attach knowledge directly to findings |
+| Headers & Sections | Full PE header walk — DOS, COFF, optional, section table |
+| Rich Header | Compiler and toolchain fingerprint recovery |
+| Resources | Embedded resource enumeration and extraction |
+| Debug Directory | PDB paths, CodeView records, debug metadata |
+| Overlay Data | Data appended past the PE image boundary |
+| TLS Callbacks | Pre-`main` execution hook detection |
+| Relocations | Base-relocation record analysis |
+| Exception Handlers | SEH and x64 exception handler table recovery |
+
+---
+
+### 🔎 Advanced RE
+
+Behavioural analysis and deeper reverse engineering modules.
+
+| Module | Description |
+|---|---|
+| Dynamic Imports | Runtime-resolved import discovery |
+| IAT Rebuild | Import Address Table reconstruction |
+| Protocol Analysis | Embedded protocol and data format detection |
+| Call Graph | Interactive full-binary call graph (Cytoscape/dagre) |
+| Loop Detection | Loop structure identification and classification |
+| Syscall Table | Direct syscall enumeration and mapping |
+| Anti-Analysis | Anti-debug, anti-sandbox, and evasion detection |
+| Patch Differ | Binary-level diff between two builds |
+| Entropy Analyzer | Per-section entropy histogram with Chart.js |
+
+---
+
+### 🛡️ Security
+
+Threat assessment, detection engineering, and IOC production.
+
+| Module | Description |
+|---|---|
+| Security Hub | Consolidated threat findings, risk scoring, and capability summary |
+| YARA Generator | Auto-generate YARA rules from binary features |
+| IOC Extractor | Surface network indicators, registry keys, file paths, and hashes |
+| Unpacker Hints | Packer identification and unpacking guidance |
+
+---
+
+### 📊 Visualization
+
+Binary structure rendered as visual maps.
+
+| Module | Description |
+|---|---|
+| Byte-Pair Digram | 256×256 byte transition heatmap |
+| Hilbert Entropy Map | Space-filling entropy visualization of the full binary |
+
+---
+
+### 💾 Export & Utilities
+
+Analysis output and round-trip tooling.
+
+| Module | Description |
+|---|---|
+| Export Analysis | Export the current analysis state as JSON |
+| Multi-Format Export | Export to JSON, YAML, and SDB simultaneously |
+| Runtime Harness | Dynamic verification harness for recovered offsets and structures |
+| Build Diff | Compare analysis results across builds |
+
+<img width="100%" src="https://capsule-render.vercel.app/api?type=rect&color=0:8A2BE2,100:00599C&height=3&section=header"/>
+
+## 🖥️ Analyst Query
+
+V2 includes an integrated **Analyst Query** panel that accepts natural-language questions about the currently loaded binary. The panel is context-aware — when a binary is loaded, the full static analysis result is embedded in the query context, allowing questions to be answered against real findings rather than general knowledge.
+
+The panel supports multi-turn conversation, one-click quick prompts, per-message copy, and chat export. When no binary is loaded, it operates as a general reverse engineering reference.
+
+<img width="100%" src="https://capsule-render.vercel.app/api?type=rect&color=0:8A2BE2,100:00599C&height=3&section=header"/>
+
+## ⚙️ Technical Stack
+
+| Component | Library |
+|---|---|
+| CFG / Call Graph / Class Hierarchy | D3 v7.9 |
+| Entropy histogram, byte-pair digram | Chart.js 4.4 |
+| Overlay / section decompress | fflate 0.8 |
+| Syntax-highlighted disasm / decompiler | Prism 1.29 |
+| Analyst Notes markdown | Marked 12 + DOMPurify 3.2 |
+| Keyboard shortcuts | hotkeys-js 3.13 |
+| Drag-reorder plugin packs | Sortable 1.15 |
+| Call graph layout engine | Cytoscape 3.30 |
+| Utilities | lodash 4.17 |
+| Disassembly engine (x86/x64/ARM/MIPS) | Capstone.js 5.0.9 (WASM) |
 
 <img width="100%" src="https://capsule-render.vercel.app/api?type=rect&color=0:8A2BE2,100:00599C&height=3&section=header"/>
 
